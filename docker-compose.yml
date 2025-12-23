@@ -7,8 +7,8 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/usr/src/app # Syncs your code
-      - /usr/src/app/node_modules # PROTECTS the container's node_modules (Don't sync this)
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
       - sqlite_data:/usr/src/app/data
 
 volumes:

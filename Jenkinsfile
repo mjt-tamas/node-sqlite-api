@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Pulls code from your GitHub repo
                 checkout scm
             }
         }
@@ -12,7 +11,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Builds the image using the Dockerfile we fixed earlier
                     sh 'docker build -t node-sqlite-api:latest .'
                 }
             }

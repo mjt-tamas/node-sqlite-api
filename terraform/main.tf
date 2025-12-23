@@ -60,7 +60,7 @@ resource "aws_security_group" "api_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-	
+
 	# Grafana Dashboard
   ingress {
     from_port   = 4000
@@ -95,7 +95,7 @@ resource "aws_instance" "api_server" {
   }
 }
 
-# 4. Output the IP so you can copy it immediately
+#4. Output the IP for SSH access
 output "instance_public_ip" {
   value = aws_instance.api_server.public_ip
 }
