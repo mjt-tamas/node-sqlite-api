@@ -21,4 +21,5 @@ app.use('/api/items', itemRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  console.log('Server running with Auto-Deploy!');
 });
