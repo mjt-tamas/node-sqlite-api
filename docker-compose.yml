@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app # Syncs your code
+      - /usr/src/app/node_modules # PROTECTS the container's node_modules (Don't sync this)
+      - sqlite_data:/usr/src/app/data
+
+volumes:
+  sqlite_data:

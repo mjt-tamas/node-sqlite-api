@@ -1,0 +1,38 @@
+name: Node.js SQLite API CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        run: |
+          docker build -t my-node-api:test .
+
+      - name: Run Container and Test Health
+        run: |
+          # Start the container in the background
+          docker run -d -p 3000:3000 --name api-test my-node-api:test
+
+          # Wait for the server to initialize (SQLite/Node startup)
+          sleep 5
+
+          curl --fail http://localhost:3000/api/health || exit 1
+
+          echo "Health check passed!"
+
+          # Cleanup
+          docker stop api-test
+          docker rm api-test
